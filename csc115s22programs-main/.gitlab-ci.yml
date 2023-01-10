@@ -1,0 +1,25 @@
+variables:
+     course: csc115
+     #professor_email: "Manes, Val <Val.Manes@sdsmt.edu>"
+     professor_email: "Schrader, Roger L. <Roger.Schrader@sdsmt.edu>"
+
+     
+# ----------------- Do Not Edit Below This Line -------------------------------
+before_script:
+  - c:\bin\env2019115.ps1
+  - set-variable -name testscript  -value "c:\scripts\basepart115.ps1" -Scope local
+
+stages:
+  - test
+
+grade:
+  allow_failure: false
+  stage: test
+  tags:
+    - csc115
+  script:
+    - invoke-expression $testscript
+    - if( $LASTEXITCODE -ne 0 ) { exit 1 }
+      
+
+
